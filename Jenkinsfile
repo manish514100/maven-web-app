@@ -7,6 +7,11 @@ pipeline {
            defaultContainer getDefaultContainer() // Retrieve default container configuration
        }
    }
+
+  environment{
+    TAG = $BUILD_NUMBER
+  }
+
     stages{   
       stage('testing') {
         steps {
@@ -24,7 +29,7 @@ pipeline {
 
 
             sh '''#!/busybox/sh
-            /kaniko/executor --context `pwd` --dockerfile Dockerfile --verbosity debug --destination registry.tritec.in/myrepo/maven-webapp:${BUILD_NUMBER}
+            /kaniko/executor --context `pwd` --dockerfile Dockerfile --verbosity debug --destination=registry.tritec.in/myrepo/maven-webapp:v$BUILD_NUMBER
             '''
         }
         }
