@@ -8,10 +8,6 @@ pipeline {
        }
    }
 
-  environment{
-    TAG = $BUILD_NUMBER
-  }
-
     stages{   
       stage('testing') {
         steps {
