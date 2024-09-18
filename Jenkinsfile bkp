@@ -17,7 +17,18 @@ pipeline {
         }  
       }
     stage('Build DockerImage with Kaniko') {
-         buildkaniko('maven')
+        environment {
+        PATH = "/busybox:/kaniko:$PATH"
+        }
+        steps {
+        container(name: 'kaniko', shell: '/busybox/sh') {
+
+
+            sh '''#!/busybox/sh
+            /kaniko/executor --context `pwd` --dockerfile Dockerfile --verbosity debug --destination=registry.tritec.in/myrepo/$JOB_BASE_NAME:v$BUILD_NUMBER
+            '''
+        }
+        }
     }
 
     }
