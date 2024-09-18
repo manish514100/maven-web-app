@@ -25,7 +25,7 @@ pipeline {
 
 
             sh '''#!/busybox/sh
-            /kaniko/executor --context `pwd` --dockerfile Dockerfile --verbosity debug --destination=registry.tritec.in/myrepo/maven-webapp:v$BUILD_NUMBER
+            /kaniko/executor --context `pwd` --dockerfile Dockerfile --verbosity debug --destination=registry.tritec.in/myrepo/$JOB_NAME:v$BUILD_NUMBER
             '''
         }
         }
