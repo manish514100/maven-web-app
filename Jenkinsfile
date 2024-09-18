@@ -17,9 +17,8 @@ pipeline {
         }  
       }
     stage('Build DockerImage with Kaniko') {
-      steps{
          buildkaniko(env: 'maven')
-      }
+      
     }
 
     }
